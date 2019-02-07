@@ -2,6 +2,18 @@
 
 pick a random word from an Array, total win count to 3, total guess count to 10
 
+*/
+
+var words = ["Book", "Book2", "Book3", "Book4"]
+
+var winCount = 3;
+
+var guessCount = 10;
+
+Math.random(words);
+
+/*
+
 Display appropriate number of blank lines on screen
 
 if user clicks correct key display letter in correct spot
