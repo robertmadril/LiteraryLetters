@@ -16,20 +16,25 @@ var lossesText = document.getElementById("loss-cnt");
 
 //Display appropriate number of blank lines on screen
 
-//var wordLength = ;
-//var randomWord = "r";
+var randomWord = words[Math.floor(Math.random() * words.length)];;
 
-
-//var randomWord = words[Math.floor(Math.random() * computerChoices.length)];
 
 document.onkeyup = function (event) {
 
-    var userGuess = event.key
+    var userGuess = event.key;
+
+    console.log(randomWord)
 
     /*if user clicks correct key display letter in correct spot
     else display letter in 'letters used' and deduct one guess */
 
-    if (words.indexOf(userGuess) > -1) {
+    if (randomWord.indexOf(userGuess) > -1) {
+
+        for (i = 0; i < words.length; i++) {
+            if (randomWord[i] === userGuess) {
+                console.log(words[i]);
+            }
+        }
         //display text in appropriate spot
     }
     else {
@@ -44,10 +49,9 @@ document.onkeyup = function (event) {
     } 
 
     guessWordText.textContent = "You chose: " + userGuess;
-    computerChoiceText.textContent = "The computer chose: " + computerGuess;
-    winsText.textContent = "Wins: " + wins;
-    lossesText.textContent = "Losses: " + losses;
-    tiesText.textContent = "Ties: " + ties;
+    guessCountText.textContent = guessCount;
+    winsText.textContent = "Wins: " + winCount;
+    lossesText.textContent = "Losses: " + lossCount;
 }
 
 /*
