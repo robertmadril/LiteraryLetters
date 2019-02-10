@@ -1,6 +1,7 @@
 
 //holds array of potential mystery words
-var words = ["booksalot", "book", "sirbookington", "bookabilly"]
+
+var words = ["booksalot", "book", "sirbookington", "bookabilly"];
 //holds initial win/loss counts
 var winCount = 0;
 var lossCount = 0;
@@ -9,7 +10,8 @@ var guessCount = 10;
 //empty array to hold mistaken guesses
 var guesses = [];
 //uses randomword() function to pull a mystery word randomly from words array
-var mystWord = randomWord(words);
+var randomWord = randomize(words)
+var mystWord = randomWord.toLowerCase();
 //splits mystery word into individual letters
 var displayWord = mystWord.split("");
 
@@ -21,16 +23,30 @@ var lossesText = document.getElementById("loss-cnt");
 
 
 
-function randomWord(arr) {
+function randomize(arr) {
     return arr[Math.floor(Math.random() * arr.length)].toUpperCase()
 };
 
 
 function blankSpace(ar) {
-    for (i=0; i<ar.length; i++) {
+    for (i = 0; i < ar.length; i++) {
         return " _ ";
     }
 };
+
+function restartFull() {
+    winCount = 0;
+    lossCount = 0;
+    guessCount = 10;
+    guesses = [];
+};
+
+function newGame() {
+    guessCount = 10;
+    guesses = [];
+    randomWord = randomize(words)
+    mystWord = randomWord.toLowerCase();
+}
 
 //test functioning
 console.log(displayWord);
@@ -41,45 +57,52 @@ console.log(mystWord);
 
 document.onkeyup = function (event) {
 
-            var userGuess = event.key;
+    var userGuess = event.key.toLowerCase();
+    var answerWord = [];
 
 
-            if (mystWord.indexOf(userGuess)>-1) {
-                console.log("Correct guess");
+    if (mystWord.indexOf(userGuess) > -1) {
+        console.log(userGuess);
+        /* answerWord.push(userGuess);
+         if (randomWord.indexOf(answerword) !== -1) {
+             winCount++;
+             alert("You Won"); */
 
-            };
+    };
 
 
-            if (mystWord.indexOf(userGuess)===-1) {
-                console.log("Incorrect guess");
-                guesses.push(userGuess);
-                guessCount--;
-            }
-
-            //test
-            console.log(guesses);
-            console.log(guessCount);
-
-                //Display appropriate number of blank lines on screen, or input
-
-            //guessWordText.textContent = "You chose: " + userGuess;
-            guessCountText.textContent = "You have " + guessCount + " guesses remaining.";
-            winsText.textContent = "Wins: " + winCount;
-            lossesText.textContent = "Losses: " + lossCount;
-        };
-
+    if (mystWord.indexOf(userGuess) === -1) {
+        console.log("Incorrect guess");
+        guesses.push(userGuess);
+        guessCount--;
 
         if (guessCount === 0) {
             //display 'you ran out of guesses and display answer.
-
-            lossCount = lossCount + 1
+            lossCount = lossCount + 1;
+            //starts new game, keeps win/loss
+            newGame();
+            console.log(randomWord);
         };
+    }
+
+    //test
+    console.log(guesses);
+    console.log(guessCount);
+    console.log(userGuess);
+
+    //Display appropriate number of blank lines on screen, or input
+
+    //guessWordText.textContent = "You chose: " + userGuess;
+    guessCountText.textContent = "You have " + guessCount + " guesses remaining.";
+    winsText.textContent = "Wins: " + winCount;
+    lossesText.textContent = "Losses: " + lossCount;
+};
 
 
 /*
 NEED
-
-when user completes full word display image of ____ and add to win count
-
-create new word when user clicks 'new word'
+Way to restart to new game, without restarting loss/wins
+Way to restart to new game when no guesses are left, show word.
+display blank letters
+fill correct guesses into right spaces
 */
