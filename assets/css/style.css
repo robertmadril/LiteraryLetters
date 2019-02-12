@@ -33,6 +33,7 @@ body, html {
     height: 450px;
     width: 700px;
     position: relative;
+    display: block;
 }
 
 img {
@@ -71,10 +72,9 @@ img {
 
 .closed-container {
     position: absolute;
-    top: 90px;
+    bottom: 200px;
     left: 5px;
     text-align: center;
-    font-family:'Libre Barcode 39 Text';
-    color: mintcream;
+    color: rgb(0, 0, 0);
     font-size: 36px;
 }
