@@ -1,7 +1,7 @@
 
 //holds array of potential mystery words
 
-var words = ["booksalot", "bok", "sirbookington", "bookabilly"];
+var words = ["Don Quixote", "Emma", "Call of the Wild", "The Great Gatsby", "Nineteen Eighty Four", "Lord of the Rings", "On the Road", ];
 //holds initial win/loss counts
 var winCount = 0;
 var lossCount = 0;
@@ -109,7 +109,8 @@ document.onkeyup = function (event) {
 
 /* Want
 
-Add start button
-Pause game before restart
+Display book close at win/lose
+Restart by pressing any key
+add spaces
 
 */

@@ -1,0 +1,80 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    border: 0px;
+    margin: 0;
+    padding: 0;
+}
+
+.full-pg {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-image: url(../images/woodbkgrd.jpg);
+    font-family: 'Libre Baskerville';
+}
+
+.top-pg {
+    font-size: 48px;
+    color: mintcream;
+    text-align: center;
+    padding-top: 50px;
+    margin: auto;
+}
+
+.top-pg h2 {
+    font-size: 36px;
+}
+
+.open-book {
+    margin: auto;
+    padding-top: 50px;
+    height: 450px;
+    width: 700px;
+    position: relative;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.left-start {
+    position: absolute;
+    top: 250px;
+    left: 60px;
+    text-align: center;
+}
+.left-box {
+    position: absolute;
+    top: 230px;
+    left: 150px;
+    text-align: center;
+}
+
+.right-box {
+    position:absolute;
+    top: 210px;
+    right: 50px;
+    text-align: center;
+}
+
+.closed-book {
+    display: none;
+    margin: auto;
+    padding-top: 50px;
+    height: 450px;
+    width: 350px;
+    position: relative;
+}
+
+.closed-container {
+    position: absolute;
+    top: 90px;
+    left: 5px;
+    text-align: center;
+    font-family:'Libre Barcode 39 Text';
+    color: mintcream;
+    font-size: 36px;
+}
