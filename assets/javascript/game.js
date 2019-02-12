@@ -25,13 +25,17 @@ var guessString = document.getElementById("guess-strng");
 
 //function starts new game while keeping win/loss count
 function newGame() {
+    //resets guess count to 10
     guessCount = 10;
+    //resets guess array to blank
     guesses = [];
+    //resets random word array to blank
     blankArr = [];
     //uses randomize function to pull a word randomly from words array
     randomWord = words[Math.floor(Math.random() * words.length)].toLowerCase();
-    //splits mystery word into individual letters
+    //splits random word into individual letters
     ranWordLetters = randomWord.split("");
+    //holds value for number of letters in array
     numBlank = ranWordLetters.length;
     for (i = 0; i < numBlank; i++) {
         blankArr.push(" _");
@@ -59,6 +63,7 @@ document.onkeyup = function (event) {
         //checks if word is complete
         if (randomWord === blankArr.join("")) {
             //display 'you ran out of guesses and display answer.
+            alert("You Won!");
             winCount = winCount + 1;
             //starts new game, keeps win/loss
             newGame();
@@ -75,6 +80,7 @@ document.onkeyup = function (event) {
         //checks if guess count is at zero
         if (guessCount < 1) {
             //display 'you ran out of guesses and display answer.
+            alert("You lost :(")
             lossCount = lossCount + 1;
             //starts new game, keeps win/loss
             newGame();
