@@ -69,7 +69,7 @@ document.onkeyup = function (event) {
             newGame();
 
         };
-    }
+    };
 
     //checks for incorrect key stroke
     if (randomWord.indexOf(userGuess) === -1) {
