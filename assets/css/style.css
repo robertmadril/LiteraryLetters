@@ -78,3 +78,10 @@ img {
     color: rgb(0, 0, 0);
     font-size: 36px;
 }
+
+.footer {
+    padding-top: 20px;
+    color: mintcream;
+    text-align: center;
+
+}

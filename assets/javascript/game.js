@@ -9,13 +9,13 @@ var winCount = 0;
 var lossCount = 0;
 //holds initial guess count
 var guessCount = 10;
-//empty array to hold mistaken guesses
+//empty arrays
 var guesses = [];
 var numBlank = 0;
 var blankArr = [];
 var randomWord = "";
 
-//connect variable to html id
+//connect variables to html id
 var guessWordText = document.getElementById("guess-word");
 var guessCountText = document.getElementById("guess-cnt");
 var winsText = document.getElementById("win-cnt");
@@ -47,8 +47,10 @@ function newGame() {
 };
 
 function checkWord(l) {
+    //loops through each index to check for correct letter
     for (var i = 0; i < numBlank; i++) {
         if (randomWord[i] === l) {
+            //changes blank array from __ to letter input
             blankArr[i] = l;
         }
     }
@@ -56,10 +58,11 @@ function checkWord(l) {
 
 function checkWin() {
     if (randomWord === blankArr.join("")) {
-        //display 'you ran out of guesses and display answer.
+        //Increase winCount by 1
         winCount = winCount + 1;
+        //displays answer on book cover
         bookCover();
-        //starts new game, keeps win/loss
+        //start new game
         newGame();
 
     };
@@ -68,26 +71,30 @@ function checkWin() {
 function checkLoss() {
     //checks if guess count is at zero
     if (guessCount < 1) {
-        //display 'you ran out of guesses and display cover.
+        //Increase loss count by 1
         lossCount = lossCount + 1;
-        //starts new game, keeps win/loss
+        //display answer on book cover
         bookCover();
+        //start new game
         newGame();
     };
 }
 
 function keepScore() {
-        //displays array without commas with .join method
-        guessWordText.textContent = blankArr.join("");
-        winsText.textContent = "Wins: " + winCount;
-        lossesText.textContent = "Losses: " + lossCount;
-        startPage.textContent = ""
-        guessString.textContent = guesses;
-        guessCountText.textContent = "You have " + guessCount + " guesses remaining.";
+    //displays array without commas with .join method
+    guessWordText.textContent = blankArr.join("");
+    //displays current status on html element
+    winsText.textContent = "Wins: " + winCount;
+    lossesText.textContent = "Losses: " + lossCount;
+    //hides start page continuously
+    startPage.textContent = ""
+    guessString.textContent = guesses;
+    guessCountText.textContent = "You have " + guessCount + " guesses remaining.";
 }
 
 function indBookCover() {
-    for (i = 0; i<words.length;i++) {
+    //loops through initial array and changes closed book cover to corresponding image
+    for (i = 0; i < words.length; i++) {
         if (words[i] === randomWord) {
             changeImage.src = images[i];
         }
@@ -95,6 +102,8 @@ function indBookCover() {
 }
 
 function bookCover() {
+
+    //directs when open book or closed book should be displayed
     indBookCover();
     if (guessCount < 1 || randomWord === blankArr.join("")) {
         openBook.style.display = "none";
@@ -106,35 +115,37 @@ function bookCover() {
     }
 }
 
+function correctKey(l) {
+    //checks for a correct key
+    if (randomWord.indexOf(l) > -1) {
+        //inserts correct userGuess into blankArray
+        checkWord(l);
+    };
+}
+
+function incorrectKey(l) {
+
+    //checks for incorrect key 
+    if (randomWord.indexOf(l) === -1) {
+        //adds incorrect letter to empty guess array
+        guesses.push(l);
+        //reduces guess count by 1
+        guessCount--;
+    }
+}
+
 newGame();
 
 document.onkeyup = function (event) {
     bookCover();
     //holds user input value
     var userGuess = event.key.toLowerCase();
-    //checks for a correct key answer
-    if (randomWord.indexOf(userGuess) > -1) {
-        //inserts correct userGuess into blankArray
-        checkWord(userGuess);
-        //checks if word is complete
-    };
 
-    //checks for incorrect key stroke
-    if (randomWord.indexOf(userGuess) === -1) {
-        //adds incorrect letter to empty guess array
-        guesses.push(userGuess);
-        //reduces guess count by 1
-        guessCount--;
-    }
+    //function calls
+    correctKey(userGuess);
+    incorrectKey(userGuess);
     checkLoss();
     checkWin();
     keepScore();
 
 };
-
-/* Want
-
-add specific book covers to each book-close
-add spaces
-
-*/
