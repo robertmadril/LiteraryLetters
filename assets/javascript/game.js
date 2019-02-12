@@ -38,60 +38,63 @@ function newGame() {
     };
 };
 
+function checkWord(l) {
+    for (var i = 0; i < numBlank; i++) {
+        if (randomWord[i] === l) {
+            blankArr[i] = l;
+        }
+    }
+}
+
 newGame();
 
 document.onkeyup = function (event) {
 
-        //holds user input value
-        var userGuess = event.key.toLowerCase();
+    //holds user input value
+    var userGuess = event.key.toLowerCase();
+    //checks for a correct key answer
+    if (randomWord.indexOf(userGuess) > -1) {
+        //inserts correct userGuess into blankArray
+        checkWord(userGuess);
+        //checks if word is complete
+        if (randomWord === blankArr.join("")) {
+            //display 'you ran out of guesses and display answer.
+            winCount = winCount + 1;
+            //starts new game, keeps win/loss
+            newGame();
 
-        if (randomWord.indexOf(userGuess) > -1) {
-            randomWord[randomWord.indexOf(userGuess)] = userGuess;
-            blankArr.push(userGuess)
+        };
+    }
 
-            if (randomWord === blankArr) {
-                //display 'you ran out of guesses and display answer.
-                winCount = winCount + 1;
-                //starts new game, keeps win/loss
-                newGame();
+    //checks for incorrect key stroke
+    if (randomWord.indexOf(userGuess) === -1) {
+        //adds incorrect letter to empty guess array
+        guesses.push(userGuess);
+        //reduces guess count by 1
+        guessCount--;
+        //checks if guess count is at zero
+        if (guessCount < 1) {
+            //display 'you ran out of guesses and display answer.
+            lossCount = lossCount + 1;
+            //starts new game, keeps win/loss
+            newGame();
+        };
+    }
 
-            };
-        }
+    //test
 
+    //displays array without commas with .join method
+    guessWordText.textContent = blankArr.join("");
+    winsText.textContent = "Wins: " + winCount;
+    lossesText.textContent = "Losses: " + lossCount;
+    startPage.textContent = ""
+    guessString.textContent = guesses;
+    guessCountText.textContent = "You have " + guessCount + " guesses remaining.";
 
-        if (randomWord.indexOf(userGuess) === -1) {
-            guesses.push(userGuess);
-            guessCount--;
+};
 
-            if (guessCount < 1) {
-                //display 'you ran out of guesses and display answer.
-                lossCount = lossCount + 1;
-                //starts new game, keeps win/loss
-                newGame();
-            };
-        }
+/* Want
 
-        //test
-        console.log(guesses);
-        console.log(userGuess);
+Add start button
 
-        guessWordText.textContent = blankArr;
-        winsText.textContent = "Wins: " + winCount;
-        lossesText.textContent = "Losses: " + lossCount;
-        startPage.textContent = ""
-        guessString.textContent = guesses;
-        guessCountText.textContent = "You have " + guessCount + " guesses remaining.";
-
-
-
-    };
-
-
-
-/*
-NEED
-Win functionality
-get rid of commas in array
-input more than one of the same char
-input characters in correct location
 */
