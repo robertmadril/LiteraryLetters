@@ -38,7 +38,7 @@ function newGame() {
     //holds value for number of letters in array
     numBlank = ranWordLetters.length;
     for (i = 0; i < numBlank; i++) {
-        blankArr.push(" _");
+        blankArr.push(" _ ");
     };
 };
 
@@ -48,6 +48,28 @@ function checkWord(l) {
             blankArr[i] = l;
         }
     }
+};
+
+function checkWin() {
+    if (randomWord === blankArr.join("")) {
+        //display 'you ran out of guesses and display answer.
+        alert("You Won!");
+        winCount = winCount + 1;
+        //starts new game, keeps win/loss
+        newGame();
+
+    };
+}
+
+function checkLoss() {
+    //checks if guess count is at zero
+    if (guessCount < 1) {
+        //display 'you ran out of guesses and display answer.
+        alert("You lost :(")
+        lossCount = lossCount + 1;
+        //starts new game, keeps win/loss
+        newGame();
+    };
 }
 
 newGame();
@@ -61,14 +83,6 @@ document.onkeyup = function (event) {
         //inserts correct userGuess into blankArray
         checkWord(userGuess);
         //checks if word is complete
-        if (randomWord === blankArr.join("")) {
-            //display 'you ran out of guesses and display answer.
-            alert("You Won!");
-            winCount = winCount + 1;
-            //starts new game, keeps win/loss
-            newGame();
-
-        };
     };
 
     //checks for incorrect key stroke
@@ -77,15 +91,9 @@ document.onkeyup = function (event) {
         guesses.push(userGuess);
         //reduces guess count by 1
         guessCount--;
-        //checks if guess count is at zero
-        if (guessCount < 1) {
-            //display 'you ran out of guesses and display answer.
-            alert("You lost :(")
-            lossCount = lossCount + 1;
-            //starts new game, keeps win/loss
-            newGame();
-        };
     }
+    checkLoss();
+    checkWin();
 
     //test
 
@@ -102,5 +110,6 @@ document.onkeyup = function (event) {
 /* Want
 
 Add start button
+Pause game before restart
 
 */
