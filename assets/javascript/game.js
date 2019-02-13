@@ -136,7 +136,7 @@ function incorrectKey(l) {
 
 newGame();
 
-document.onkeyup = function (event) {
+document.onkeydown = function (event) {
     bookCover();
     //holds user input value
     var userGuess = event.key.toLowerCase();
